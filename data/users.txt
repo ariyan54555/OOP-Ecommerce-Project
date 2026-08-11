@@ -1,0 +1,7 @@
+Ariyan Zaman,asd78900,SELLER
+Rishon,qwe,CUSTOMER
+Ariyan,123,CUSTOMER
+Nadim,asd,SELLER
+mubin,asd,CUSTOMER
+ARIF,ASD,CUSTOMER
+najeeb,asd,SELLER
