@@ -1,7 +1,1 @@
-1,IPhone,100000.0,98,Ariyan Zaman
-2,Laptop,45000.0,28,Ariyan Zaman
-3,Perfume,4500.54,40,Ariyan Zaman
-4,Fan,1000.0,70,Ariyan Zaman
-5,LED,350.0,50,Ariyan Zaman
-6,Panther Condom,120.0,497,Nadim
-7,Shoes,500.0,988,najeeb
+
