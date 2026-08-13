@@ -15,16 +15,6 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Handles a single client's connection on its own thread.
- *
- * Wire protocol (one line per request, one line per response):
- *   Request:  COMMAND:payload            (payload fields are comma-separated)
- *   Response: STATUS:data                (STATUS = SUCCESS | FAIL, data varies by command)
- *
- * Example matching the project overview's illustrative "BUY:productId:quantity":
- *   ADD_TO_CART:12,3   then   CHECKOUT:
- */
 public class ClientHandler implements Runnable {
 
     private final Socket socket;
@@ -70,10 +60,7 @@ public class ClientHandler implements Runnable {
         }
     }
 
-    // ---------------------------------------------------------------
-    // Request routing
-    // ---------------------------------------------------------------
-
+   
     private String handleRequest(String request) {
         String command;
         String payload;
@@ -106,15 +93,11 @@ public class ClientHandler implements Runnable {
                 default: return "FAIL:Unknown command";
             }
         } catch (Exception e) {
-            // Defensive: malformed payloads should never crash the thread / server.
             return "FAIL:Malformed request";
         }
     }
 
-    // ---------------------------------------------------------------
-    // Auth
-    // ---------------------------------------------------------------
-
+ 
     private String handleRegister(String payload) {
         String[] parts = payload.split(",", -1);
         if (parts.length != 3) return "FAIL:Expected username,password,role";
@@ -129,10 +112,6 @@ public class ClientHandler implements Runnable {
         currentUser = u;
         return "SUCCESS:" + u.getRole();
     }
-
-    // ---------------------------------------------------------------
-    // Customer: browsing
-    // ---------------------------------------------------------------
 
     private String handleListProducts() {
         return encodeProducts(productManager.getAllProducts());
@@ -155,9 +134,6 @@ public class ClientHandler implements Runnable {
         return sb.toString();
     }
 
-    // ---------------------------------------------------------------
-    // Customer: cart + checkout (the synchronized purchase flow)
-    // ---------------------------------------------------------------
 
     private String handleAddToCart(String payload) {
         if (!(currentUser instanceof Customer)) return "FAIL:Login as a customer first";
@@ -196,13 +172,7 @@ public class ClientHandler implements Runnable {
         return sb.toString();
     }
 
-    /**
-     * Core synchronized purchase flow. For every cart line, delegate to
-     * ProductManager.purchase(id, qty) - the single synchronized method
-     * that checks stock, deducts it, and saves the file as one unit. If any
-     * line fails partway through a multi-item cart, previously deducted
-     * items are rolled back so the checkout is all-or-nothing.
-     */
+   
     private String handleCheckout() {
         if (!(currentUser instanceof Customer)) return "FAIL:Login as a customer first";
         Customer customer = (Customer) currentUser;
@@ -247,9 +217,6 @@ public class ClientHandler implements Runnable {
         return "SUCCESS:" + o.getStatus();
     }
 
-    // ---------------------------------------------------------------
-    // Seller: product + order management
-    // ---------------------------------------------------------------
 
     private String handleAddProduct(String payload) {
         if (!(currentUser instanceof Seller)) return "FAIL:Login as a seller first";
@@ -310,9 +277,6 @@ public class ClientHandler implements Runnable {
         }
     }
 
-    // ---------------------------------------------------------------
-    // Shared helpers
-    // ---------------------------------------------------------------
 
     private String encodeOrders(List<Order> orders) {
         StringBuilder sb = new StringBuilder("SUCCESS:");
