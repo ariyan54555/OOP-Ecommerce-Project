@@ -79,7 +79,7 @@ public class OrderManager {
         return result;
     }
 
-    /** Orders that contain at least one item whose product belongs to this seller. */
+   
     public synchronized List<Order> getOrdersBySeller(String sellerUsername, ProductManager productManager) {
         List<Order> result = new ArrayList<>();
         for (Order o : orders) {
@@ -94,11 +94,7 @@ public class OrderManager {
         return result;
     }
 
-    /**
-     * Corner case: only a seller who actually owns an item in the order may
-     * update its status, and only to a recognized lifecycle stage
-     * (Pending -> Confirmed -> Packed -> Shipped -> Delivered).
-     */
+ 
     public synchronized String updateStatus(int orderId, String sellerUsername, String newStatus,
                                              ProductManager productManager) {
         Order order = findById(orderId);
