@@ -38,12 +38,7 @@ public class Customer extends User {
         cart.clear();
     }
 
-    /**
-     * Packages the current cart into a new Order and empties the cart.
-     * Stock validation/deduction is handled by ProductManager (see
-     * ClientHandler.handleCheckout) since that is where the synchronized,
-     * file-backed inventory lives.
-     */
+
     public Order checkout(int orderId) {
         if (cart.isEmpty()) {
             return null;
