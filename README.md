@@ -1,4 +1,4 @@
-# E-Commerce Management System
+# E-Commerce Management System(Console Based)
 
 A Java-based **E-Commerce Management System** developed as an
 Object-Oriented Programming (OOP) project. The system uses a
