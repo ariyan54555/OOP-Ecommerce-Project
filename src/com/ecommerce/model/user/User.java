@@ -1,9 +1,5 @@
 package com.ecommerce.model.user;
 
-/**
- * Abstract base class for all system users.
- * Demonstrates: Abstraction, Encapsulation (private/protected fields + accessors).
- */
 public abstract class User {
 
     protected String username;
@@ -26,10 +22,10 @@ public abstract class User {
         return this.password.equals(password);
     }
 
-    /** Polymorphic - each subclass returns its own role string. */
+  
     public abstract String getRole();
 
-    /** Used when persisting to users.txt : username,password,ROLE */
+   
     @Override
     public String toString() {
         return username + "," + password + "," + getRole();
