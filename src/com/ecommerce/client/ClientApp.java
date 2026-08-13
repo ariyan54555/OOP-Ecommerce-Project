@@ -43,10 +43,7 @@ public class ClientApp {
         System.out.println("Disconnected. Goodbye!");
     }
 
-    // ---------------------------------------------------------------
-    // Auth
-    // ---------------------------------------------------------------
-
+   
     private static void authMenu() {
         while (role == null) {
             System.out.println("\n=== Welcome ===");
@@ -108,10 +105,7 @@ public class ClientApp {
         }
     }
 
-    // ---------------------------------------------------------------
-    // Customer menu
-    // ---------------------------------------------------------------
-
+  
     private static void customerMenu() {
         boolean running = true;
         while (running) {
@@ -165,10 +159,7 @@ public class ClientApp {
         }
     }
 
-    // ---------------------------------------------------------------
-    // Seller menu
-    // ---------------------------------------------------------------
-
+   
     private static void sellerMenu() {
         boolean running = true;
         while (running) {
@@ -236,9 +227,7 @@ public class ClientApp {
         }
     }
 
-    // ---------------------------------------------------------------
-    // Networking + response rendering helpers
-    // ---------------------------------------------------------------
+   
 
     private static String send(String request) {
         try {
