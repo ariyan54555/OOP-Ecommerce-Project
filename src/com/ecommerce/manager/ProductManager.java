@@ -6,15 +6,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Owns the centralized, in-memory product inventory and its file backing
- * (data/products.txt). purchase(id, qty) is the project's core technical
- * highlight: it is synchronized on the manager itself so that, for every
- * purchase across the whole catalog, the stock check, the stock update,
- * and the file save happen together as one atomic unit. That is what
- * prevents two customers from both "successfully" buying the last units
- * of a product at the same time (overselling).
- */
+
 public class ProductManager {
 
     private static final String FILE_PATH = "data/products.txt";
@@ -97,7 +89,7 @@ public class ProductManager {
         return "SUCCESS:" + p.getId();
     }
 
-    /** Corner case: product not found returns a clear response, not a crash. */
+
     public synchronized String updateProduct(int id, String sellerUsername, String name, double price) {
         Product p = findById(id);
         if (p == null) return "FAIL:Product not found";
@@ -118,12 +110,6 @@ public class ProductManager {
         return "SUCCESS";
     }
 
-    /**
-     * The synchronized purchase flow. Only one thread (one customer's
-     * request) can execute this method at a time across the whole catalog,
-     * so a stock check can never be invalidated by another thread's update
-     * before the file is saved.
-     */
     public synchronized String purchase(int id, int qty) {
         if (qty <= 0) {
             return "FAIL:Invalid quantity";
@@ -140,7 +126,7 @@ public class ProductManager {
         return "SUCCESS";
     }
 
-    /** Used to roll back stock if a later item in a multi-item checkout fails. */
+
     public synchronized void restock(int id, int qty) {
         Product p = findById(id);
         if (p != null) {
