@@ -8,11 +8,6 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-/**
- * Central server. Loads all data on startup, opens a ServerSocket, and
- * spawns one ClientHandler thread per connecting client so multiple
- * Customers and Sellers can be served concurrently.
- */
 public class Server {
 
     private final int port;
