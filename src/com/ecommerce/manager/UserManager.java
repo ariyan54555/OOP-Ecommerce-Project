@@ -79,7 +79,7 @@ public class UserManager {
         return "SUCCESS:" + u.getRole();
     }
 
-    /** Corner case: invalid login returns an error rather than granting access. */
+   
     public synchronized User login(String username, String password) {
         for (User u : users) {
             if (u.getUsername().equals(username) && u.authenticate(password)) {
